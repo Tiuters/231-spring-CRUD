@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <style>table th, table td {padding: 5px;}</style>
+</head>
+<body>
+<h1></h1>
+<table border="">
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Wheels</th>
+    </tr>
+    <tr th:each="car : ${caMod}">
+        <td th:utext="${car.getName()}"></td>
+        <td th:utext="${car.getType()}"></td>
+        <td th:utext="${car.getWheels()}"></td>
+    </tr>
+</table>
+</body>
+</html>
