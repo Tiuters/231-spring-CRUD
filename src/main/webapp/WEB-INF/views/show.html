@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car</title>
+</head>
+<body>
+<!--<p th:text="${car.getName()}">VALUE</p>-->
+<!--<p th:text="${car.getType()}">VALUE</p>-->
+<!--<p th:text="${car.getDoors()}">VALUE</p>-->
+
+<table border="">
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Doors</th>
+    </tr>
+    <tr>
+        <td th:utext="${car.getName()}"></td>
+        <td th:utext="${car.getType()}"></td>
+        <td th:utext="${car.getDoors()}"></td>
+    </tr>
+</table>
+
+<!--<a th:href="@{/cars/{id}/edit(id=${car.getId()})}">Edit</a>-->
+<form th:action="@{/cars/{id}/edit(id=${car.getId()})}">
+    <button>Edit</button>
+</form>
+
+
+<form th:method="DELETE" th:action="@{/cars/{id}(id=${car.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

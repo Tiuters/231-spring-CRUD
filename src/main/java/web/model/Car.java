@@ -1,25 +1,62 @@
 package web.model;
 
-public class Car {
-    private String name;
-    private String type;
-    private int wheels;
+import javax.persistence.*;
 
-    public Car(String name, String type, int wheels) {
+@Entity
+@Table(name = "cars")
+public class Car {
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private int id;
+
+    @Column
+    private String name;
+
+    @Column
+    private String type;
+
+    @Column
+    private int doors;
+
+    public Car() {
+    }
+
+    public Car(int id, String name, String type, int doors) {
+        this.id = id;
         this.name = name;
         this.type = type;
-        this.wheels = wheels;
+        this.doors = doors;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getType() {
         return type;
     }
 
-    public int getWheels() {
-        return wheels;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getDoors() {
+        return doors;
+    }
+
+    public void setDoors(int doors) {
+        this.doors = doors;
     }
 }

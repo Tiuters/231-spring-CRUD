@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все машины</title>
+</head>
+
+
+
+<body>
+
+<div th:each="car : ${cars}">
+    <a th:href="@{/cars/{id}(id=${car.getId()})}"
+         th:text="${car.getName() + ',   ' + car.getType() + ',   ' + car.getDoors()}"></a>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/cars/new">Create new car</a>
+
+</body>
+</html>
+
+
+<!--Ссылка в таблице не получается-->
+<!--<body>-->
+<!--<h1></h1>-->
+<!--<table border="">-->
+<!--    <tr>-->
+<!--        <th>Name</th>-->
+<!--        <th>Type</th>-->
+<!--        <th>Doors</th>-->
+<!--    </tr>-->
+<!--    <tr th:each="car : ${cars}">-->
+<!--        <td th:href="@{/cars/{id}(id=${car.getId()})}" th:text="${car.getName()}"></td>-->
+<!--        <td th:text="${car.getType()}"></td>-->
+<!--        <td th:text="${car.getDoors()}"></td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+<!--<br/>-->
+<!--<hr/>-->
+
+<!--<a href="/cars/new">Create new car</a>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
+

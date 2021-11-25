@@ -1,26 +1,83 @@
 package web.service;
 
+import hiber.util.Util;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
 import web.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class CarFactory {
+    Session session = null;
+    Transaction txn = null;
+    private static int CARS_COUNT;
 
-    public List<Car> getCars(int count){
-        List<Car> cars = new ArrayList<>();
-        cars.add(new Car("Elef", "perpet", 4));
-        cars.add(new Car("Hippo", "perpet", 5));
-        cars.add(new Car("Mouse", "perpet", 3));
-        cars.add(new Car("Zzz", "evn", 4));
-        cars.add(new Car("Ggg", "mon", 4));
+    public List<Car> index() {
 
-        return cars
-            .stream()
-            .limit(count)
-            .collect(Collectors.toList());
+        try {
+            session = Util.getSessionFactory().openSession();
+            System.out.println("Создание сессии");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        List<Car> users = null;
+        try {
+            session.beginTransaction();
+            users = session.createQuery("FROM Car").list();
+            txn = session.getTransaction();
+            txn.commit();
+        } catch (Throwable e) {
+            if (txn != null) {
+                txn.rollback();
+            }
+            throw e;
+        }
+//        session.close();
+        return users;
     }
+
+
+
+
+    public Car show(int id) {
+//        return cars.stream().filter(person -> person.getId() == id)
+//            .findAny().orElse(null);
+        return null;
+    }
+
+    public void save(Car car) {
+//        car.setId(++CARS_COUNT);
+//        cars.add(car);
+    }
+
+    public void update(int id, Car updatedCar) {
+//        Car personToBeUpdated = show(id);
+//        personToBeUpdated.setName(updatedCar.getName());
+//        personToBeUpdated.setType(updatedCar.getType());
+//        personToBeUpdated.setDoors(updatedCar.getDoors());
+    }
+
+    public void delete(int id) {
+//        cars.removeIf(p -> p.getId() == id);
+    }
+
+
+
+ //    public List<Car> index() {
+//        return cars;
+//    }
+
+
+    //    private List<Car> cars;
+//    {
+//        cars = new ArrayList<>();
+//
+//        cars.add(new Car(++CARS_COUNT, "Carrr", "T", 2));
+//        cars.add(new Car(++CARS_COUNT, "Phiiii", "Q", 0));
+//        cars.add(new Car(++CARS_COUNT, "Trycl", "H", 3));
+//        cars.add(new Car(++CARS_COUNT, "Jazzz", "J", 8));
+//    }
 }
