@@ -23,10 +23,10 @@ public class CarFactory {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        List<Car> users = null;
+        List<Car> cars = null;
         try {
             session.beginTransaction();
-            users = session.createQuery("FROM Car").list();
+            cars = session.createQuery("FROM Car").list();
             txn = session.getTransaction();
             txn.commit();
         } catch (Throwable e) {
@@ -35,11 +35,29 @@ public class CarFactory {
             }
             throw e;
         }
-//        session.close();
-        return users;
+        return cars;
     }
 
+    public void save(Car car) {
 
+        try {
+            session = Util.getSessionFactory().openSession();
+            System.out.println("Создание сессии");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            session.beginTransaction();
+            session.save(car);
+            txn = session.getTransaction();
+            txn.commit();
+        } catch (Throwable e) {
+            if (txn != null) {
+                txn.rollback();
+            }
+            throw e;
+        }
+    }
 
 
     public Car show(int id) {
@@ -48,10 +66,10 @@ public class CarFactory {
         return null;
     }
 
-    public void save(Car car) {
-//        car.setId(++CARS_COUNT);
-//        cars.add(car);
-    }
+//    public void save(Car car) {
+////        car.setId(++CARS_COUNT);
+////        cars.add(car);
+//    }
 
     public void update(int id, Car updatedCar) {
 //        Car personToBeUpdated = show(id);

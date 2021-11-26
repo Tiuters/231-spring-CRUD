@@ -21,8 +21,7 @@ public class Car {
     public Car() {
     }
 
-    public Car(int id, String name, String type, int doors) {
-        this.id = id;
+    public Car(String name, String type, int doors) {
         this.name = name;
         this.type = type;
         this.doors = doors;
